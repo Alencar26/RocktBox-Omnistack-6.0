@@ -11,6 +11,6 @@ const BoxController = require('./controllers/BoxController');
 const FileController = require('./controllers/FileController');
 
 routes.post('/boxes', BoxController.store);
-routes.post('/files', FileController.store);
+routes.post('/boxes/:id/files', multer(multerConfig).single('file') ,FileController.store);
 
 module.exports = routes;
