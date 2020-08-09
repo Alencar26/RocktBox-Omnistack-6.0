@@ -14,9 +14,15 @@ const File = new mongoose.Schema({
         type: String,
         required: true, // campo obrigatório
     },
-    files: []
 }, {
     timestamps: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
+});
+
+//CAMPO VIRTUAL << NÃO EXISTE LÁ NO MANGODB, MAS, EXISTE NO BACKEND
+File.virtual('url').get(function() {
+    return `http://localhost:3333/files/${encodeURIComponent(this.path)}`;
 });
 
 // exportando o mongoose model com nome de 'Box' e passando o schema como parâmetro.

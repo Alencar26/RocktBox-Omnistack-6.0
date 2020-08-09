@@ -16,6 +16,9 @@ class FileController {
 
         await box.save();
 
+        req.io.sockets.in(box._id).emit('file', file); // utilizando o web sockets para informar em tempo real que um novo
+                                                      // arquivo foi criado naquela pasta.
+
         return res.json(file);
     }
 
