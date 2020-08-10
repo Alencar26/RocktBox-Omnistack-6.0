@@ -42,6 +42,7 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp'))); // toda
 
 app.use(Routes);
 
-server.listen(3333, () => {
+// utilizando variável ambiente para que no caso da máquina usar uma porta diferente da 3333 não de erro!
+server.listen(process.env.PORT || 3333, () => {
     console.log("Server Ativo!")
 });

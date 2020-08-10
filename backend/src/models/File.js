@@ -22,7 +22,13 @@ const File = new mongoose.Schema({
 
 //CAMPO VIRTUAL << NÃO EXISTE LÁ NO MANGODB, MAS, EXISTE NO BACKEND
 File.virtual('url').get(function() {
-    return `http://localhost:3333/files/${encodeURIComponent(this.path)}`;
+
+     // usando variável ambiente para informar a url
+    const url = process.env.URL || 'http://localhost:3333';
+    return `${url}/files/${encodeURIComponent(this.path)}`;
+
+    // usando url estática
+   // return `http://localhost:3333/files/${encodeURIComponent(this.path)}`;
 });
 
 // exportando o mongoose model com nome de 'Box' e passando o schema como parâmetro.
